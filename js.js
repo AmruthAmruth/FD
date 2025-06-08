@@ -1,9 +1,10 @@
-const wm = new WeakMap();
 
-let obj = { name: "Amruth" };
+const promise1=new Promise((resolve,reject)=>{
+    return resolve("Hello promise")
+})
 
-wm.set(obj, "some secret data");
 
-console.log(wm.get(obj)); // "some secret data"
-
-obj = null; 
+promise1.then((data)=>{
+    console.log(data);
+    
+})
