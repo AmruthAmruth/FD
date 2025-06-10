@@ -42,10 +42,15 @@ class Graph{
           queue.push(neighbor)
           visited.add(neighbor)
         }
+<<<<<<< HEAD
       })      
+=======
+        
+>>>>>>> 71139c0a572e0e5434e95c4291e9c069975bac27
     }
   }
 
+<<<<<<< HEAD
 dfs(start,visted=new Set()){
   if(!this.adjacencyList[start]) return;
   visted.add(start);
@@ -69,3 +74,18 @@ graph.addEdge("C","E")
 graph.addEdge("D","A")
 graph.display()
 graph.dfs("A")
+=======
+
+    addEdge(vertex1,vertex2){
+        if(!this.adjacencyList[vertex1]){
+            this.addVertex(vertex1)
+        }
+         if(!this.adjacencyList[vertex2]){
+            this.addVertex(vertex2)
+        }
+        this.adjacencyList[vertex1].push(vertex2)
+    }
+
+
+}
+>>>>>>> 71139c0a572e0e5434e95c4291e9c069975bac27
