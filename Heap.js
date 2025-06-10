@@ -1,43 +1,47 @@
 
 
-class Heap{
-    constructor(){
-        this.value=[]
+class HashTable{
+    constructor(size=10){
+        this.table=new Array(size);
+        this.size=size
     }
 
-    insert(value){
-        this.value.push(value)
-        this.bubbleUp()
-    }
-
-    bubbleUp(){
-        let index=this.value.length-1;
-        while(index>0){
-            let parentIndex=Math.floor((index-1)/2)
-            let parent = this.value[parentIndex]
-            let element=this.value[index]
-            if(parent>element) break;
-            this.value[parentIndex]=element;
-            this.value[index]=parent
-            index=parentIndex
+    _hash(key){
+        let hash=0;
+        for(let i=0;i<key.length;i++){
+            hash+= key.charCodeAt(i)
         }
+        return hash % this.table.length;
     }
 
 
-    
-
-
-
-    display(){
-        console.log(this.value);
-        
+    set(key,value){
+        let index = this._hash(key);
+        if(!this.table[index]){
+            this.table[index]=[]
+        }
+        for(let item of this.table[index]){
+            if(item[0]===key){
+                item[1]=value;
+                return
+            }
+        }
+        this.table[index].push([key,value])
     }
+
+
+    get(key){
+        let hash=this._hash(key);
+        if(!this.table[hash]){
+            return null
+        }
+        for(let item of this.table[hash]){
+            if(item[0]===key){
+                return item[1]
+            }
+        }
+        return null
+    }
+
+
 }
-
-const heap = new Heap()
-heap.insert(1)
-heap.insert(3)
-heap.insert(4)
-heap.insert(3)
-heap.insert(5)
-heap.display()
