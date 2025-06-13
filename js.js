@@ -1,8 +1,30 @@
+const data = {
+  a: 5,
+  b: {
+    c: 10,
+    d: [2, { e: 3 }],
+  },
+  f: [1, 4],
+};
 
+function deepSum(obj) {
+  let result = 0;
+  function recuresiveSum(val) {
+    if (typeof val === "number") {
+      result += val;
+    } else if (typeof val === "object") {
+      for (let n in val) {
+        recuresiveSum(val[n]);
+      }
+    } else if (Array.isArray(val)) {
+      for (let n of val) {
+        recuresiveSum(n);
+      }
+    }
+    return result;
+  }
+  recuresiveSum(obj);
+  return result;
+}
 
-
-const add=(a)=>a+a
-
-const multy=(b)=>b*b
-
-const result=(add(multy(10)))
+console.log(deepSum(data));
