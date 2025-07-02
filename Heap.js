@@ -1,47 +1,27 @@
 
-
-class HashTable{
-    constructor(size=10){
-        this.table=new Array(size);
-        this.size=size
+class MinHeap{
+    constructor(){
+        this.heap=[]
     }
 
-    _hash(key){
-        let hash=0;
-        for(let i=0;i<key.length;i++){
-            hash+= key.charCodeAt(i)
-        }
-        return hash % this.table.length;
+    getParent(index){
+        return Math.floor((i-1)/2)
     }
 
+    insert(vlaue){
+        this.heap.push(value);
+        this.bubbleUp(this.heap.length-1)
+    }
 
-    set(key,value){
-        let index = this._hash(key);
-        if(!this.table[index]){
-            this.table[index]=[]
+    bubbleUp(index){
+        let parentIndex= this.getParent(index);
+        while(index > 0 && this.heap[parentIndex] > this.heap[index]){
+            [this.heap[parentIndex],this.heap[index]]=[this.heap[index],this.heap[parentIndex]]
+            index=parentIndex;
+            parentIndex=this.getParent(index)
         }
-        for(let item of this.table[index]){
-            if(item[0]===key){
-                item[1]=value;
-                return
-            }
-        }
-        this.table[index].push([key,value])
     }
 
 
-    get(key){
-        let hash=this._hash(key);
-        if(!this.table[hash]){
-            return null
-        }
-        for(let item of this.table[hash]){
-            if(item[0]===key){
-                return item[1]
-            }
-        }
-        return null
-    }
-
-
+    
 }
