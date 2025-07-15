@@ -1,95 +1,73 @@
 class HashTable {
-  constructor(size = 5) {
-    this.size = size;
+  constructor(size) {
     this.table = new Array(size).fill(null);
+    this.size = size;
     this.count = 0;
   }
 
   _hash(key) {
-    let hash = 0;
+    let index = 0;
     for (let i = 0; i < key.length; i++) {
-      hash += key.charCodeAt(i);
+      index += key.charCodeAt(i);
     }
-    return hash % this.size;
+    return index % this.size;
   }
 
-  _rehashing(newSize) {
-    console.log("Rehashig Called");
-    
-    this.size = newSize;
+  _rehashing() {
+    console.log("Rehashing");
     let oldTable = this.table;
+    this.table = new Array(this.size * 2).fill(null);
     this.count = 0;
-    this.table = new Array(newSize).fill(null);
-    for (let bucket of oldTable) {
-      if (bucket) {
-        this.set(bucket[0], bucket[1]);
+    for (let item of oldTable) {
+      if (item) {
+        this.set(item[0], item[1]);
       }
     }
+  }
+
+  _loadFactor() {
+    return this.count / this.size;
   }
 
   set(key, value) {
+    if (this._loadFactor() > 0.7) {
+      this._rehashing();
+    }
     let index = this._hash(key);
-
-    while (this.table[index] !== null) {
-      if (this.table[index][0] === key && this.table[index] !=="DELETED") {
-        this.table[index][1] = value;
-        return;
-      }
+    while (this.table[index] && this.table[index][0] !== key) {
       index = (index + 1) % this.size;
     }
+    if (!this.table[index]) {
+      this.count++;
+    }
     this.table[index] = [key, value];
-    this.count++;
-    if (this.count / this.size > 0.7) {
-      this._rehashing(this.size * 2);
-    }
   }
 
-
-  get(key){
+  get(key) {
     let index = this._hash(key);
-    let startIndex = index;
-
-    while(this.table[index] !== null){
-      if(this.table[index][0]===key && this.table[index] !== "DELETED"){
-        return this.table[index][1]
+    let start = index;
+    while (this.table[index]) {
+      if (this.table[index][0] == key) {
+        return this.table[index][1];
       }
-      index = (index+1) % this.size;
-      if(startIndex === index) break;
+      index = (index + 1) % this.size;
+      if (start === index) break;
     }
-    return undefined;
+    return "Not Found..!";
   }
 
-
-remove(key){
-  let index = this._hash(key);
-  let startIndex = index;
-  while(this.table[index] !== null){
-    if(this.table[index][0]===key){
-      this.table[index]="DELETED"
-      return true;
-    }
-    index = (index+1)%this.size;
-      if(index===startIndex) break;
+  display(){
+    console.log(this.table);
+    
   }
-  return false;
-}
-
-display(){
-  console.log(this.table);
-  
 }
 
 
-}
+const table = new HashTable(5)
 
-
-const table = new HashTable();
-table.set('name','Amruth')
-table.set('place','Amruth')
-table.set('age','Amruth')
-table.set('qwer','Amruth')
-table.set('sd','Amruth')
-table.remove('age')
-console.log(table.get('name'));
+table.set("name","Amruth")
+table.set("mane","Amruth")
+table.set("mnea","Amruth")
+table.set("aemn","Amruth")
+table.set("neae","Amruth")
 table.display()
-

@@ -35,7 +35,6 @@ stack.push(3);
 stack.push(5);
 stack.push(6);
 stack.push(10);
-
 console.log("Popped:", stack.pop());  
 console.log("Top:", stack.peek());  
 stack.display();

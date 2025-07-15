@@ -1,56 +1,57 @@
-function factorial(n) {
-  if (n === 1) {
-    return 1;
-  }
-  return n * factorial(n - 1);
-}
-console.log(factorial(5));
+// function factorial(n){
+//   if(n===0) return 1;
+//   return n * factorial(n-1)
+// }
+// console.log(factorial(5));
 
-function sumOfArray(arr) {
-  if (arr.length === 0) return 0;
+// function print1ToN(n) {
+//   if (n === 0) return;
+//   print1ToN(n - 1);
+//   console.log(n);
+// }
+// console.log(print1ToN(5));
 
-  return arr[0] + sumOfArray(arr.slice(1));
-}
-console.log(sumOfArray([1, 3, 2]));
+// function sum(n){
+//   if(n===0) return 0;
+//   return n + sum(n-1)
+// }
+// console.log(sum(5));
 
-function reverseStr(str) {
-  if (str.length === 0) {
-    return str;
-  }
-  return reverseStr(str.slice(1)) + str[0];
-}
-console.log(reverseStr("Hello"));
+// function fib(n){
+//   if(n===1) return 1;
+//   if(n===0) return 0;
+//   return fib(n-1) + fib(n-2)
+// }
+// console.log(fib(5));
 
-function fibonacci(n) {
-  if (n <= 1) return n;
-  return fibonacci(n - 1) + fibonacci(n - 2);
-}
-console.log(fibonacci(6));
+// function reverseStr(str){
+//   if(str==="") return "";
+//   return str.slice(1)+str[0]
+// }
 
-function isPalindrom(str, left = 0, right = str.length - 1) {
-  if (left >= right) return true;
-  if (str[left] !== str[right]) return false;
-  return isPalindrom(str, left + 1, right - 1);
-}
+// console.log(reverseStr("Amruth"));
 
-console.log(isPalindrom("mamam"));
+// function checkPalindrome(str,left=0,right=str.length-1){
+//   if(left>=right) return true
+//   if(str[left] !== str[right]){
+//     return false
+//   }
+//   return checkPalindrome(str,left+1,right-1)
+// }
 
-function sumOfNNumber(n) {
-  if (n === 1) return 1;
-  return n + sumOfNNumber(n - 1);
-}
+// console.log(checkPalindrome("MAM"));
 
-console.log(sumOfNNumber(5));
+// function isSorted(arr) {
+//   if (arr.length <= 1) return true;
+//   if (arr[0] > arr[1]) return false;
+//   return isSorted(arr.slice(1));
+// }
+// console.log(isSorted([1, 2, 3, 4]));
 
-function countDown(n) {
-  if (n === 0) {
-    console.log("Done");
-    return 1;
-  }
-  setTimeout(() => {
-    console.log(n);
-    countDown(n - 1);
-  }, 1000);
-}
-
-countDown(10);
+// function reverseArr(arr) {
+//   if (arr.length === 0) {
+//     return arr.toString("").split(" ");
+//   }
+//   return reverseArr(arr.slice(1)) + arr[0];
+// }
+// console.log(reverseArr([1, 2, 3, 4, 5]));

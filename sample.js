@@ -1,58 +1,121 @@
-class Graph {
-  constructor() {
-    this.adjancencyList = {};
-  }
+// function insertionSort(arr){
+//     let n= arr.length;
+//     for(let i=1;i<n;i++){
+//         let key=arr[i]
+//         let j=i-1;
+//         while(j >=0 && arr[j] > key){
+//             arr[j+1]=arr[j]
+//             j--
+//         }
+//         arr[j+1]=key
+//     }
+//     return arr
+// }
 
-  addVertex(vertex) {
-    if (!this.adjancencyList[vertex]) this.adjancencyList[vertex] = [];
-  }
+// function insertionSort(arr) {
+//   let n = arr.length;
+//   for (let i = 1; i < n; i++) {
+//     let key = arr[i];
+//     let j = i - 1;
+//     while (j >= 0 && arr[j] > key) {
+//       arr[j + 1] = arr[j];
+//       j--;
+//     }
+//     arr[j + 1] = key;
+//   }
+//   return arr;
+// }
 
-  addEdge(vertex1, vertex2) {
-    this.addVertex(vertex1);
-    this.addVertex(vertex2);
-    this.adjancencyList[vertex1].push(vertex2);
-  }
+// console.log("Insertion Sort ", insertionSort([2, 5, 1, 3, 4]));
 
-  bfs(start) {
-    let queue = [start];
-    let visited = new Set();
-    visited.add(start);
+// function selectionSort(arr){
+//   let n = arr.length;
+//   for(let i=0;i<n-1;i++){
+//     let minIndex = i;
+//     for(let j=i+1;j<n;j++){
+//       if(arr[minIndex] > arr[j]){
+//         minIndex=j
+//       }
 
-    while (queue.length > 0) {
-      let item = queue.shift(); // FIFO queue for BFS
-      console.log(item);
+//     }
+//     if(minIndex !== i){
+//       [arr[minIndex],arr[i]]=[arr[i],arr[minIndex]]
+//     }
+//   }
+//   return arr
+// }
 
-      this.adjancencyList[item].forEach((val) => {
-        if (!visited.has(val)) {
-          visited.add(val);
-          queue.push(val);
-        }
-      });
+// console.log("Selection Sort ", selectionSort([2, 1, 4, 5, 3]));
+
+// function QuickSort(arr) {
+//   let n = arr.length;
+//   if (n <= 1) return arr;
+//   let pivot = arr[n - 1];
+//   let left = [];
+//   let right = [];
+//   for (let i = 0; i < n - 1; i++) {
+//     if (arr[i] < pivot) {
+//       left.push(arr[i]);
+//     } else {
+//       right.push(arr[i]);
+//     }
+//   }
+//   return [...QuickSort(left), pivot, ...QuickSort(right)];
+// }
+
+// console.log("Quick Sort ", QuickSort([2, 5, 1, 3, 4]));
+
+
+
+
+    // function merge(arr){
+    //     if(arr.length <= 1) return arr
+    //     let mid = Math.floor(arr.length/2)
+    //     let left=merge(arr.slice(0,mid))
+    //     let right=merge(arr.slice(mid))
+    //    return  mergeSort(left,right)
+      
+    // }
+
+    // function mergeSort(left,right){
+    //   console.log("Left",left);
+      
+    //     let result=[]
+    //     let i=0,j=0;
+    //     while(i< left.length && j < right.length){
+    //         if(left[i] < right[j]){
+    //             result.push(left[i])
+    //             i++
+    //         }else{
+    //             result.push(right[j])
+    //             j++
+    //         }
+    //     }
+    //     return result.concat(left.slice(i)).concat(right.slice(j))
+    // }
+
+
+    function merge(arr){
+      if(arr.length<=1) return arr;
+      let mid = Math.floor(arr.length/2);
+      let left=merge(arr.slice(0,mid));
+      let right=merge(arr.slice(mid))
+      return mergeSort(left,right)
     }
-  }
 
-  dfs(start, visited = new Set()) {
-    if (!this.adjancencyList[start]) return;
-
-    console.log(start);
-    visited.add(start);
-
-    this.adjancencyList[start].forEach((val) => {
-      if (!visited.has(val)) {
-        this.dfs(val, visited);
+    function mergeSort(left,right){
+      let result=[];
+      let i=0;let j=0;
+      while(i< left.length &&  j< right.length){
+            if(left[i]<right[j]){
+              result.push(left[i])
+              i++
+            }else{
+              result.push(right[j])
+              j++
+            }
       }
-    });
-  }
-}
+      return result.concat(left.slice(i).concat(right.slice(j)))
+    }
 
-const grap = new Graph();
-grap.addEdge("A", "B");
-grap.addEdge("B", "C");
-grap.addEdge("B", "D");
-grap.addEdge("C", "D");
-
-console.log("DFS:");
-grap.dfs("A");
-
-console.log("BFS:");
-grap.bfs("A");
+console.log("Merge Sort", merge([4,1,3,2,5]));

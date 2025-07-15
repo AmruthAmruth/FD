@@ -54,10 +54,7 @@ class minHeap {
     }
 
     if (smallest !== index) {
-      [this.heap[smallest], this.heap[index]] = [
-        this.heap[index],
-        this.heap[smallest],
-      ];
+      [this.heap[smallest], this.heap[index]] = [this.heap[index],this.heap[smallest],];
       this.bubleDown(smallest);
     }
   }
